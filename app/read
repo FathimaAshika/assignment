@@ -1,0 +1,33 @@
+define relationships in model 
+
+
+
+-show all the students
+-show all the students who are older than 18
+-show all the students in class 8 in 2010
+-show the class and the parents for given student id
+-show students who are older than 16 and who have parents older than 50.
+
+Emails:
+-send students details in 10 minutes time to a given email address. (student name, age, names of the parents, class)
+
+Auth:
+-Create an authentication with two users (admin, user)
+-After login to the system/app show all the table's data (tables that you've created above) to all the user types
+-Only admin can add/delete/update data in the tables (create suitable form)
+
+
+
+
+
+
+
+Use Laravel route (ex: student/all) /only logged users can do this. Please refer the auth  task.
+
+
+
+
+
+
+
+ex: send/student_details/name@example.com
