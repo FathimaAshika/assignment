@@ -13,7 +13,12 @@
     </div>
 </div>
 
-
+<div class="row">
+<a href="students" class="btn btn-primary" > Students  </a> 
+<a href="cources" class="btn btn-primary" > Cources  </a> 
+<a href="parents" class="btn btn-primary" > Parents  </a> 
+   
+</div>
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
   <p>{{ $message }}</p>

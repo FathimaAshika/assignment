@@ -13,10 +13,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
   //  $student
 	$parentStudent =App\ParentStudent::find(1);
-	$student = $parentStudent->parents;
+	$student = $parentStudent->student->name;
 	 dd($student);
 });
 
@@ -30,7 +30,21 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
-  //  Route::resource('roles','RoleController');
+      Route::resource('cources','CourceController');
+
+    Route::resource('students','StudentController');
     Route::resource('users','UserController');
+
+    Route::resource('parents','ParentsController');
+    Route::get('send/student_details/{email}','UserController@sendEmailStudentDetails');
+
+    // create middleware for admin 
+    
+    // Route::group(['middleware' => 'jwt-auth'], function () {
+    //     Route::get('get_user_details/{token}', 'APIController@get_user_details');
+    // });
+
    
 });
+
+

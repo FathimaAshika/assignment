@@ -12,7 +12,7 @@ class ParentStudent extends Model
         'student_id', 'parent_id'
     ];
 
-        public function students()
+        public function student()
     {
         return $this->belongsTo('App\Student');
     }

@@ -14,32 +14,25 @@
 </div>
 
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
-@endif
-
-
 <table class="table table-bordered">
+@if($role=="admin")
+<tr> <h2>   <a class="btn btn-success" href="{{ route('users.create') }}"> Create New Cource </a> </h2></tr>
+@endif  
+
  <tr>
    <th>No</th>
    <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
+   <th>Year </th>
+ 
    <th width="280px">Action</th>
  </tr>
- @foreach ($data as $key => $user)
+ @foreach ($cources as $key => $user)
   <tr>
     <td>{{ ++$i }}</td>
     <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-    <td>
-    
-    </td>
+    <td>{{ $user->year }}</td>
     @if($role=="admin")
     <td>
-        <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
 
  
@@ -55,7 +48,7 @@
 </table>
 
 
-{!! $data->render() !!}
+{!! $cources->render() !!}
 
 
 @endsection

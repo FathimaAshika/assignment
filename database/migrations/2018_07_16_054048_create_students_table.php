@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('cource_id');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('city');
             //$table->timestamps();
         });

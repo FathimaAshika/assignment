@@ -15,8 +15,9 @@ class CreateParentStudentTable extends Migration
     {
         Schema::create('parent_students', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
+            $table->integer('student_id')->unsigned();
             $table->integer('parent_id');
+            $table->foreign('student_id')->references('id')->on('students');
          
             //$table->timestamps();
         });

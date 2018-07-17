@@ -16,7 +16,7 @@ class CreateParentsTable extends Migration
         Schema::create('parents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('dob');
+            $table->date('dob');
             $table->enum('type', ['M', 'F']);
         });
     }

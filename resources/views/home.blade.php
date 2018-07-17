@@ -14,8 +14,16 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in as  {{ $role }} ! 
                 </div>
+
+                <div class="row">
+<a href="students" class="btn btn-primary" > Students  </a> 
+<a href="cources" class="btn btn-primary" > Cources  </a> 
+<a href="parents" class="btn btn-primary" > Parents  </a> 
+   
+</div>
+
             </div>
         </div>
     </div>

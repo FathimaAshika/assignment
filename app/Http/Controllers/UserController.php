@@ -8,16 +8,36 @@ use App\User;
 use App\Role;
 //use Spatie\Permission\Models\Role;
 use DB;
+use Mail;
+
 use Hash;
+use App\RoleUser;
+use Auth;
+use App\Student;
+use App\Cource;
+use App\Parent1;
+use App\ParentStudent;
+
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+
+
+       $data = User::orderBy('id','DESC')->paginate(5);
+        $students = Student::orderBy('id','DESC')->paginate(5);
+        $cources = Cource::orderBy('id','desc')->paginate(5);
+        $parents = Parent1::orderBy('id','DESC')->paginate();
+
+
+
+    $userId =$request->user()->id;
+    $roleId =RoleUser::where('user_id',$userId)->value('role_id');
+     $role= ($roleId=='1') ? "admin" : "user";
+
+        return view('users.index',compact('students','role','cources','data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
-       // echo "index";
 
     }
 
@@ -112,6 +132,49 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
+
+     public function sendEmailStudentDetails($email)
+    {
+
+       $studentId = 1;
+       $student =Student::find($studentId);
+       $dob  = $student->dob;
+       $studentName =$student->name ;
+
+        $age = $this->getAge($dob);
+
+        $courceId =$student->cource_id;
+        $class = Cource::whereId($courceId)->value('year');
+
+        $parentId = ParentStudent::where('student_id',$studentId)->value('parent_id');
+        $parent =Parent1::find($parentId);
+        $parentName =$parent->name;
+
+        $sendMail = Mail::send('studentDetails', ['email' => $email ,  'studentName'=>$studentName,'age'=> $age ,'parentName'=> $parentName,
+        'class'=>$class ], function ($message) use ($email, $studentName,$age ,$parentName,$class) {
+                        $message->to($email)->subject('Student Details ');
+        });
+        return $sendMail;
+
+
+    }
+    public function getAge($dob){
+
+         $start  = date_create($dob);
+        $end    = date_create(); // Current time and date
+        $diff   = date_diff( $start, $end );
+        $age = $diff->y;
+        return $age;
+
+
+    }
+
+
+    
+
+
+     
+
 
 
 }

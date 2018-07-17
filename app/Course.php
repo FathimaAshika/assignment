@@ -12,6 +12,10 @@ class Cource extends Model
         'name', 'year'
     ];
 
-    
+     public function student()
+    {
+    	 return $this->hasOne('App\student');
+    }
+
 
 }
