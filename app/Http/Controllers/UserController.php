@@ -49,11 +49,15 @@ class UserController extends Controller
      */
     public function create()
     {
+        Auth::user()->authorizeRoles("admin"); 
+
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
     }
      public function store(Request $request)
     {
+        Auth::user()->authorizeRoles("admin");
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -88,6 +92,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        Auth::user()->authorizeRoles("admin");
+
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
@@ -98,6 +104,8 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        Auth::user()->authorizeRoles("admin");
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
@@ -128,6 +136,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        Auth::user()->authorizeRoles("admin");
+        
         User::find($id)->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
