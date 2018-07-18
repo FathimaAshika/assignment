@@ -12,15 +12,6 @@ class ParentStudent extends Model
         'student_id', 'parent_id'
     ];
 
-        public function student()
-    {
-        return $this->belongsTo('App\Student');
-    }
-
-        public function parents()
-    {
-        return $this->belongsTo('App\Parent1');
-    }
 
     
 }

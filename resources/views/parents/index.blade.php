@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Users Management {{ $role }} </h2>
+            <h2>Parents  Management - {{ $role }} </h2>
         </div>
         <div class="pull-right">
           
@@ -13,12 +13,7 @@
     </div>
 </div>
 
-<div class="row">
-<a href="students" class="btn btn-primary" > Students  </a> 
-<a href="cources" class="btn btn-primary" > Cources  </a> 
-<a href="parents" class="btn btn-primary" > Parents  </a> 
-   
-</div>
+
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
   <p>{{ $message }}</p>
@@ -27,28 +22,31 @@
 
 
 <table class="table table-bordered">
+  @if($role=="admin")
+<tr> <h2>   <a class="btn btn-success" href="{{ route('parents.create') }}"> Create New Parent  </a> </h2></tr>
+@endif 
  <tr>
    <th>No</th>
    <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
+   <th>DOB</th>
+   <th>Type</th>
+
    <th width="280px">Action</th>
  </tr>
- @foreach ($data as $key => $user)
+ @foreach ($parents as $p)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-    <td>
-    
-    </td>
+    <td>{{ $p->name }}</td>
+    <td>{{ $p->dob }}</td>
+        <td>{{ $p->type  }}</td>
+  
     @if($role=="admin")
     <td>
-        <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+       
+       <a class="btn btn-primary" href="{{ route('parents.edit',$p->id) }}">Edit</a>
 
  
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+        {!! Form::open(['method' => 'DELETE','route' => ['parents.destroy', $p->id],'style'=>'display:inline']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </td>
@@ -60,7 +58,7 @@
 </table>
 
 
-{!! $data->render() !!}
+{!! $parents->render() !!}
 
 
 @endsection

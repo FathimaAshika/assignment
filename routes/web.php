@@ -13,11 +13,8 @@
 */
 
 Route::get('/', function () {
-    //return view('welcome');
-  //  $student
-	$parentStudent =App\ParentStudent::find(1);
-	$student = $parentStudent->student->name;
-	 dd($student);
+    return view('auth.login');
+
 });
 
  

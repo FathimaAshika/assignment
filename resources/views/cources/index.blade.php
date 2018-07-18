@@ -16,7 +16,7 @@
 
 <table class="table table-bordered">
 @if($role=="admin")
-<tr> <h2>   <a class="btn btn-success" href="{{ route('users.create') }}"> Create New Cource </a> </h2></tr>
+<tr> <h2>   <a class="btn btn-success" href="{{ route('cources.create') }}"> Create New Cource </a> </h2></tr>
 @endif  
 
  <tr>
@@ -26,17 +26,17 @@
  
    <th width="280px">Action</th>
  </tr>
- @foreach ($cources as $key => $user)
+ @foreach ($cources as $c)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->year }}</td>
+    <td>{{ $c->name }}</td>
+    <td>{{ $c->year }}</td>
     @if($role=="admin")
     <td>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+       <a class="btn btn-primary" href="{{ route('cources.edit',$c->id) }}">Edit</a>
 
  
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+        {!! Form::open(['method' => 'DELETE','route' => ['cources.destroy', $c->id],'style'=>'display:inline']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     </td>

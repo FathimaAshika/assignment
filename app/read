@@ -1,16 +1,10 @@
 
 
 
--show all the students
--show all the students who are older than 18
--show all the students in class 8 in 2010
--show the class and the parents for given student id
--show students who are older than 16 and who have parents older than 50.
 
 
 Auth:
 
--After login to the system/app show all the table's data (tables that you've created above) to all the user types
 
 -Only admin can add/delete/update data in the tables (create suitable form)
 
